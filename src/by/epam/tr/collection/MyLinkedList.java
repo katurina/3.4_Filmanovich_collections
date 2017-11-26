@@ -1,11 +1,12 @@
 package by.epam.tr.collection;
 
 import java.util.Collection;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class MyLinkedList<E> implements List<E> {
+public class MyLinkedList<E> implements List<E>{
 
     private static final String INDEX = "Index: ";
     private static final String SIZE = ", Size: ";
@@ -36,6 +37,162 @@ public class MyLinkedList<E> implements List<E> {
         last = null;
     }
 
+    public MyLinkedList(Collection<? extends E> c) {
+        this();
+        addAll(c);
+    }
+
+
+    public E poll() {
+        return pollFirst();
+    }
+
+    public E element() {
+        return getFirst();
+    }
+
+    public E peek() {
+        return (first == null) ? null : first.item;
+    }
+
+    public void push(E e) {
+        addFirst(e);
+
+    }
+
+    public E pop() {
+        return removeFirst();
+    }
+
+    public void addFirst(E e) {
+        Node<E> f = first;
+        Node<E> newNode = new Node<>(null, e, f);
+        first = newNode;
+        if (f == null) {
+            last = newNode;
+        } else {
+            f.previous = newNode;
+        }
+        size++;
+    }
+
+    public void addLast(E e) {
+        final Node<E> l = last;
+        final Node<E> newNode = new Node<>(l, e, null);
+        last = newNode;
+        if (l == null) {
+            first = newNode;
+        } else {
+            l.next = newNode;
+        }
+        size++;
+    }
+
+    public boolean offerFirst(E e) {
+        addFirst(e);
+        return true;
+    }
+
+    public boolean offerLast(E e) {
+        addLast(e);
+        return true;
+    }
+
+    public E removeFirst() {
+        if (first == null) {
+            return null;
+        }
+        E element = first.item;
+        final Node<E> next = first.next;
+        first.item = null;
+        first = next;
+        if (next == null) {
+            last = null;
+        } else {
+            next.previous = null;
+        }
+        size--;
+        return element;
+    }
+
+    public E removeLast() {
+        if (last == null) {
+            return null;
+        }
+        E element = last.item;
+        Node<E> prev = last.previous;
+        last.item = null;
+        last = prev;
+        if (prev == null) {
+            first = null;
+        } else {
+            prev.next = null;
+        }
+        size--;
+        return element;
+    }
+
+    public E pollFirst() {
+        if (first == null) {
+            return null;
+        }
+        Node<E> f = first;
+        remove(0);
+        return f.item;
+    }
+
+    public E pollLast() {
+        if (last == null) {
+            return null;
+        }
+        E element = last.item;
+        Node<E> prev = last.previous;
+        last.item = null;
+        last.previous = null;
+        last = prev;
+        if (prev == null) {
+            first = null;
+        } else {
+            prev.next = null;
+        }
+        size--;
+        return element;
+
+    }
+
+    public E getFirst() {
+        if (first == null) {
+            return null;
+        }
+        return first.item;
+    }
+
+    public E getLast() {
+        if (last == null) {
+            return null;
+        }
+        return last.item;
+    }
+
+    public E peekFirst() {
+        if (first == null) {
+            return null;
+        }
+        return first.item;
+    }
+
+
+    public E peekLast() {
+        if (last == null) {
+            return null;
+        }
+        return last.item;
+    }
+
+    public boolean removeFirstOccurrence(Object o) {
+        return remove(o);
+    }
+
     @Override
     public int size() {
         return size;
@@ -55,6 +212,7 @@ public class MyLinkedList<E> implements List<E> {
     public MyLinkedListIterator iterator() {
         return new MyLinkedListIterator();
     }
+
 
     private class MyLinkedListIterator implements Iterator<E> {
         int cursor = 0;
@@ -99,6 +257,14 @@ public class MyLinkedList<E> implements List<E> {
         }
         size++;
         return true;
+    }
+
+    public boolean offer(E e) {
+        return add(e);
+    }
+
+    public E remove() {
+        return removeFirst();
     }
 
 
