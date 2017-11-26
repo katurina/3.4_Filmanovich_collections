@@ -90,7 +90,7 @@ public class MyLinkedList<E> implements List<E> {
     @Override
     public boolean add(E e) {
         Node<E> rememberLast = last;
-        Node<E> newNode = new Node<E>(null, e, null);
+        Node<E> newNode = new Node<E>(rememberLast, e, null);
         last = newNode;
         if (size == 0) {
             first = newNode;
@@ -196,7 +196,7 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        if (index > 0 && index < size) {
+        if (index >= 0 && index < size) {
             if (index < (size / 2)) {
                 Node<E> x = first;
                 for (int i = 0; i < index; i++) {

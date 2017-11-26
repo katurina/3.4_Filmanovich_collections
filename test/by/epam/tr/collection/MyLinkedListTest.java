@@ -4,7 +4,6 @@ package by.epam.tr.collection;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class MyLinkedListTest {
@@ -15,11 +14,9 @@ public class MyLinkedListTest {
         actual.add(25);
         actual.add(45);
         actual.add(75);
-        List<Integer> expected = new LinkedList<>();
-        expected.add(25);
-        expected.add(45);
-        expected.add(75);
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals((Object) 25, actual.get(0));
+        Assert.assertEquals((Object) 45, actual.get(1));
+        Assert.assertEquals((Object) 75, actual.get(2));
     }
 
 
