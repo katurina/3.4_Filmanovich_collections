@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class MyLinkedList<E> implements List<E>{
+public class MyLinkedList<E> implements List<E> {
 
     private static final String INDEX = "Index: ";
     private static final String SIZE = ", Size: ";
@@ -507,8 +507,10 @@ public class MyLinkedList<E> implements List<E>{
         }
         boolean modified = false;
         for (Object o : c) {
-            remove(o);
-            modified = true;
+            while (contains(o)) {
+                remove(o);
+                modified = true;
+            }
         }
         return modified;
     }

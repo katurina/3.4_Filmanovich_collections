@@ -262,22 +262,22 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean retainAll(Collection c) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean removeAll(Collection c) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean containsAll(Collection c) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public Object[] toArray(Object[] a) {
-        return new Object[0];
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private void checkSizeCapacity() {
